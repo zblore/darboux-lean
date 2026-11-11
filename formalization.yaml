@@ -1,0 +1,225 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+
+version: "v0.4"
+
+# Zayn Blore's ORCID: 0009-0009-8447-7247
+
+project:
+  name: "Darboux's theorem: every symplectic form on an open subset of R^2n is locally the standard one"
+  description: >-
+    A machine-checked proof of Darboux's theorem in the form Kim Morrison stated it for lean-eval
+    (problem darboux): if a 2-form on an open set U of R^2n is smooth, closed and non-degenerate,
+    then every point of U has a neighbourhood with a smooth chart, smooth in both directions, in
+    which the form takes the standard values on the standard basis, so it is the standard
+    symplectic form sum dx_i ^ dx_(n+i). The proof is Moser's: interpolate between the form and
+    its value at the point, write the difference as d(beta) by a Poincare lemma, integrate the
+    vector field X_t with i_(X_t) omega_t = -beta to time 1, and get a chart from the inverse
+    function theorem; a symplectic basis of the form at the point then gives the standard
+    coordinates. Mathlib has no symplectic forms and no Darboux theorem. When lean-eval posed the
+    problem in May 2026 it found no formalization in any proof assistant; since then three other
+    Lean proofs of Darboux's theorem have appeared, each with its own statement (listed under
+    related_formalizations). This proof is independent of them. The theorem is classical and no
+    priority is claimed.
+  authors:
+    - "Zayn Blore"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Zayn Blore"
+
+sources:
+  - title: "Sur le probleme de Pfaff"
+    authors:
+      - "Gaston Darboux"
+    type: "paper"
+    location: >-
+      Bull. Sci. Math. 6 (1882), 14-36 and 49-68. The theorem. Cited by me, not by lean-eval,
+      whose problem cites only Knill. Not read for this entry.
+    relationship: "formalizes"
+    author_endorsement: "n/a"
+  - title: "On the volume elements on a manifold"
+    authors:
+      - "Jurgen Moser"
+    id: "https://doi.org/10.1090/S0002-9947-1965-0182927-5"
+    type: "paper"
+    location: >-
+      Trans. Amer. Math. Soc. 120 (1965), 286-294. The deformation method ("Moser's trick")
+      that the proof uses. Not read for this entry.
+    relationship: "background"
+    author_endorsement: "n/a"
+  - title: "Symplectic manifolds and their Lagrangian submanifolds"
+    authors:
+      - "Alan Weinstein"
+    id: "https://doi.org/10.1016/0001-8708(71)90020-X"
+    type: "paper"
+    location: >-
+      Adv. Math. 6 (1971), 329-346. Moser's method applied to symplectic forms. Not read for this
+      entry.
+    relationship: "background"
+    author_endorsement: "n/a"
+  - title: "Introduction to Symplectic Topology"
+    authors:
+      - "Dusa McDuff"
+      - "Dietmar Salamon"
+    id: "https://doi.org/10.1093/oso/9780198794899.001.0001"
+    type: "book"
+    location: >-
+      3rd ed., Oxford University Press, 2017. Darboux's theorem (cited by csd-lean4 as Theorem
+      3.2.2) and symplectic bases (Section 2.1), the textbook account of the proof. Not read for
+      this entry.
+    relationship: "background"
+    author_endorsement: "n/a"
+  - title: "Some Fundamental Theorems in Mathematics"
+    authors:
+      - "Oliver Knill"
+    id: "https://people.math.harvard.edu/~knill/graphgeometry/papers/fundamental.pdf"
+    type: "other"
+    location: "Section 39, as cited by lean-eval's problem. Not read for this entry."
+    relationship: "background"
+    author_endorsement: "n/a"
+
+related_formalizations:
+  - id: "https://github.com/leanprover/lean-eval/blob/85a88c37f80170d9f08651dc63ce6b81a8a48cb9/generated/darboux/Challenge.lean"
+    relationship: "builds-on"
+    note: >-
+      Supplies the statement: Kim Morrison's lean-eval problem darboux (added 25 May 2026;
+      Copyright 2026 Lean FRO, LLC, Apache 2.0). Challenge.lean copies its ChallengeDeps.lean and
+      Challenge.lean apart from the module header, @[expose] public section, moving the
+      definitions into one file, and term proofs in place of omega for the bounds in idxP and
+      idxQ (see fidelity); scripts/check-lean-eval-match.py checks this. lean-eval's v1 audit of
+      20 Aug 2026 records four accepted solutions from four users, the first on 17 Jun 2026; I
+      found none of them published, and this entry does not use them.
+  - id: "https://github.com/zblore/csd-lean4/tree/8b99f249/CsdLean4/Mathlib"
+    relationship: "builds-on"
+    note: >-
+      The proof. The 18 files under DarbouxLean/ other than Bridge.lean and Defs.lean are copied
+      from csd-lean4 at commit 8b99f249, with imports renamed and their comments edited; the code
+      is unchanged. The files were written from 11 Jul 2026; the Darboux proof itself (Darboux.lean,
+      DarbouxStandardForm.lean, SymplecticBasis.lean) on 21-23 Sep 2026. csd-lean4 proves Darboux
+      on a ball, C^k for 1 <= k <= infinity, and on a symplectic manifold. DarbouxLean/Bridge.lean
+      derives lean-eval's statement from the ball version.
+  - id: "https://github.com/t4v1/damian_formalizare/blob/545ebb1a7d4c55299b1f59787a7ff0d4d703af27/MorseFloer/Part2/Darboux.lean"
+    relationship: "independent"
+    note: >-
+      MorseFloer.Darboux.darboux (16 Sep 2026), in a formalization of Audin and Damian's Morse
+      Theory and Floer Homology: by Moser's method, a C^1 closed form on a finite-dimensional real
+      space, non-degenerate at a point, is near that point the pullback of its constant value
+      there. A different statement from lean-eval's (no standard form, no EuclideanSpace R
+      (Fin (2n))). Not used here.
+  - id: "https://github.com/TauCetiProject/TauCeti/blob/7ca783d4c8d324c9c74efaacd641c8a40f69f284/TauCeti/Geometry/Symplectic/Darboux/Basic.lean"
+    relationship: "independent"
+    note: >-
+      Tau Ceti's Darboux theorem by Moser's method, first merged 19 Oct 2026 (PR #18754):
+      exists_diffeomorph_eventually_compContinuousLinearMap_fderiv_eq, for a closed form on an
+      open subset of a finite-dimensional real normed space. A different statement from
+      lean-eval's. Not used here.
+  - id: "https://github.com/TauCetiProject/TauCeti/blob/7ca783d4c8d324c9c74efaacd641c8a40f69f284/TauCeti/Geometry/Symplectic/Manifold/Darboux.lean"
+    relationship: "independent"
+    note: >-
+      Tau Ceti's Darboux charts on symplectic manifolds (4 Nov 2026), including
+      IsSymplectic.exists_standardDarbouxChart into EuclideanSpace R (Fin n) x EuclideanSpace R
+      (Fin n). A different statement from lean-eval's. Not used here.
+  - id: "https://github.com/facebookresearch/atlas-lean/blob/main/WantedExt/Geometry/DarbouxWanted.lean"
+    relationship: "other"
+    note: >-
+      ATLAS lists lean-eval's statement as a wanted theorem, without a proof.
+
+classification:
+  arxiv:
+    - "math.SG"
+    - "math.DG"
+  msc2020:
+    - "53D05"
+    - "58A10"
+
+automation:
+  methods:
+    - method: "agent"
+      models:
+        - "Claude Opus 4.8"
+        - "Claude Fable 5"
+        - "Claude Opus 5"
+        - "Claude Fable 5.1"
+        - "Claude Opus 5.5"
+      framework: "Claude Code"
+  notes: >-
+    I drafted the Lean with Claude Code. The csd-lean4 commit trailers of the 18 copied files
+    name Claude Opus 4.8 (1M context), Claude Fable 5, Claude Opus 5 (also in its 1M-context
+    version), Claude Fable 5.1 and Claude Opus 5.5. For the Darboux proof itself, Claude Opus 5
+    assembled Moser's proof (Darboux.lean, 21 Sep 2026), and Claude Fable 5.1 added the C^n chart
+    and the standard form (Darboux.lean, DarbouxStandardForm.lean, SymplecticBasis.lean, 23 Sep
+    2026). Claude Opus 5.5 ported the files and wrote the bridge to lean-eval's statement.
+
+review:
+  status: "self-assessed"
+  notes: >-
+    Checked locally (Windows): the build; scripts/check-lean-eval-match.py and its self-test,
+    which regenerate Challenge.lean's code from lean-eval's two files at the pinned commit,
+    apply exactly the two idxP and idxQ substitutions, pin both files by SHA-256 and confirm that
+    21 altered inputs fail (a comparison of text, against lean-eval's Mathlib b63f6e8a rather
+    than this repository's 5e0c4e52); a comparison of every constant that darboux's statement
+    reaches in Challenge and in Solution, which match by name and term up to the names of bound
+    variables (which Comparator ignores), with none private to Challenge or to this repository's
+    modules; audit/Axioms.lean,
+    which enforces with #guard_msgs that the main result and key lemmas use only propext,
+    Classical.choice and Quot.sound; and audit/Control.lean, which checks that the audit detects
+    sorryAx, that the hypotheses hold for the constant standard form in every dimension, and
+    that the zero form is not in Darboux normal form. lake comparator needs Linux, so it runs in
+    CI and in Palomar's own pipeline.
+
+status:
+  scope: >-
+    A full proof of lean-eval's darboux. Apart from the placeholder in Challenge.lean, the only
+    sorry is a deliberate control in audit/Control.lean, which Solution does not import.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms:
+    - "propext"
+    - "Classical.choice"
+    - "Quot.sound"
+  main_results:
+    - description: >-
+        Every smooth, closed, non-degenerate 2-form on an open set of R^2n is, near each point,
+        the pullback of the standard symplectic form by a smooth chart with smooth inverse.
+      declaration: "darboux"
+      file: "DarbouxLean/Bridge.lean"
+      comparator_config: "comparator.json"
+      sorry_count: 0
+      axioms:
+        - "propext"
+        - "Classical.choice"
+        - "Quot.sound"
+    - description: >-
+        Darboux on a ball in any finite-dimensional real normed space: a C^k form (1 <= k <=
+        infinity), closed on the ball and non-degenerate at the centre, is the pullback of the
+        standard form on R^2n by a C^k chart with C^k inverse, and the dimension is 2n.
+      declaration: "exists_openPartialHomeomorph_pullback_standard"
+      file: "DarbouxLean/Geometry/Manifold/DarbouxStandardForm.lean"
+      sorry_count: 0
+      axioms:
+        - "propext"
+        - "Classical.choice"
+        - "Quot.sound"
+
+fidelity:
+  divergences: >-
+    One, in the proofs inside two definitions. lean-eval proves the bounds in idxP and idxQ with
+    `by have := i.isLt; omega`; Challenge.lean and Defs.lean use term proofs. omega leaves an
+    auxiliary lemma private to its module, so the definitions in a second module would be
+    different constants and Comparator would reject the match. Both versions give the same Fin
+    values, so the statement means the same. Otherwise Challenge.lean is lean-eval's text, with
+    its definitions moved into the file. It builds against Mathlib 5e0c4e52 rather than
+    lean-eval's b63f6e8a, with the same Lean v4.35.0-rc3, so the check against lean-eval compares
+    text, not elaborated terms.
+
+alignment:
+  namespaces:
+    - "LeanEval.Geometry.Darboux"
+    - "DarbouxLean"
+  statements:
+    - source: "lean-eval, darboux (Kim Morrison)"
+      lean: "darboux"
+      module: "DarbouxLean.Bridge"
+      status: "proved"
+
+acknowledgements: >-
+  Thanks to Kim Morrison for the problem statement, and to the authors of Lean 4 and Mathlib.

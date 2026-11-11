@@ -1,0 +1,8 @@
+darboux-lean
+Copyright 2026 Zayn Blore
+
+This repository contains text copied from lean-eval (https://github.com/leanprover/lean-eval,
+commit 85a88c37f80170d9f08651dc63ce6b81a8a48cb9): the problem `darboux` by Kim Morrison, in
+Challenge.lean and DarbouxLean/Defs.lean. lean-eval is Copyright 2026 Lean FRO, LLC, and is
+licensed under the Apache License, Version 2.0. The changes to that text are listed in the module
+docstring of Challenge.lean.
